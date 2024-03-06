@@ -22,6 +22,7 @@ import Meta from '../components/Meta'
 
 
 const ProductScreen = () => {
+   const [mainImage, setMainImage] = useState('')
   const { id: productId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ const ProductScreen = () => {
     isLoading: loading,
     error,
   } = useGetproductDetailQuery(productId)
+  console.log(product);
  const [rating, setRating] = useState(0)
  const [comment, setComment] = useState('')
  const [createReview, { isLoading: loadingProductReview }] =
@@ -68,7 +70,9 @@ const ProductScreen = () => {
      toast.error(error?.data?.message || error.error)
    }
  }
-
+const handleThumbnailImageClick = (image) => {
+  setMainImage(image)
+}
   if (loading) {
     return <Loader />
   }
@@ -85,7 +89,27 @@ const ProductScreen = () => {
       <Meta title={product.name} />
       <Row>
         <Col md={5}>
-          <Image src={product.image} alt={product.name} fluid />
+          <Image
+            src={mainImage || product.images[0]}
+            alt={product.name}
+            fluid
+          />
+
+          <div className='mt-3 thumbnail-container'>
+            {product.images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                alt={`Image ${index + 1}`}
+                thumbnail
+                className={`thumbnail ${
+                  mainImage === image ? 'thumbnail-active' : ''
+                }`}
+                onClick={() => handleThumbnailImageClick(image)}
+                style={{ cursor: 'pointer', width: '50px', height: '50px' }}
+              />
+            ))}
+          </div>
         </Col>
         <Col md={4}>
           <ListGroup variant='flush'>
@@ -157,7 +181,7 @@ const ProductScreen = () => {
           </Card>
         </Col>
       </Row>
-      <Row className='review'>
+      <Row>
         <Col md={6}>
           <h2>Reviews</h2>
           {product.reviews.length === 0 && <Message>No reviews</Message>}
@@ -175,7 +199,6 @@ const ProductScreen = () => {
                     onClick={() => deleteReviewHandler(review._id)}
                   >
                     <FaTrash />
-                    
                   </Button>
                 )}
               </ListGroupItem>

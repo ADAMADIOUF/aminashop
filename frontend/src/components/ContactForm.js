@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSendContactFormMutation } from '../Slices/contactApiSlice'
 import { useLocation, useParams } from 'react-router-dom'
 import { useGetOrderDetailsQuery } from '../Slices/orderApiSlice'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Form, Button, Alert } from 'react-bootstrap' // Import the necessary components from React Bootstrap
 
 const Contact = () => {
   const location = useLocation()
@@ -43,13 +43,12 @@ const Contact = () => {
       if (formData.totalPrice) {
         emailContent += `\nTotal Price: $${formData.totalPrice}`
       }
-setIsFormSubmitted(true)
 
-       
-        setTimeout(() => {
-          setIsFormSubmitted(false)
-        }, 5000)
-     
+      setIsFormSubmitted(true) 
+      setTimeout(() => {
+        
+      }, 5000)
+
       const result = await sendContactForm({
         ...formData,
         message: emailContent,
@@ -62,7 +61,7 @@ setIsFormSubmitted(true)
         phone: '',
         description: '',
         address: '',
-        totalPrice:""
+        totalPrice: '',
       })
     } catch (error) {
       console.error('An error occurred while submitting the form:', error)
@@ -70,90 +69,92 @@ setIsFormSubmitted(true)
   }
 
   return (
-    <form onSubmit={handleSubmit} className='section-center'>
-      <h2>Billing details</h2>
-      <div>
-        <label htmlFor='firstName'>First Name:</label>
-        <input
-          type='text'
-          id='firstName'
-          value={formData.firstName}
-          onChange={(e) =>
-            setFormData({ ...formData, firstName: e.target.value })
-          }
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor='lastName'>Last Name:</label>
-        <input
-          type='text'
-          id='lastName'
-          value={formData.lastName}
-          onChange={(e) =>
-            setFormData({ ...formData, lastName: e.target.value })
-          }
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor='phoneNumber'>Phone Number:</label>
-        <input
-          type='tel'
-          id='phoneNumber'
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor='address'>Address:</label>
-        <textarea
-          id='address'
-          value={formData.address}
-          onChange={(e) =>
-            setFormData({ ...formData, address: e.target.value })
-          }
-          required
-        ></textarea>
-      </div>
-
-      <div>
-        <label htmlFor='description'>Description:</label>
-        <textarea
-          id='description'
-          value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
-        ></textarea>
-      </div>
-      <div className='order-input'>
-        <label htmlFor='totalPrice'>prix total CFA:</label>
-        <input
-          type='text'
-          id='totalPrice'
-          name='totalPrice'
-          value={formData.totalPrice}
-          onChange={(e) =>
-            setFormData({ ...formData, totalPrice: e.target.value })
-          }
-        />
-      </div>
-      <button type='submit' className='btn-contact' disabled={isLoading}>
-        {isLoading ? 'Sending...' : 'Send Message'}
-      </button>
+    <>
+      {!isFormSubmitted && (
+        <Form onSubmit={handleSubmit}>
+          <h2>Billing details</h2>
+          <Form.Group controlId='firstName'>
+            <Form.Label>First Name:</Form.Label>
+            <Form.Control
+              type='text'
+              value={formData.firstName}
+              onChange={(e) =>
+                setFormData({ ...formData, firstName: e.target.value })
+              }
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId='lastName'>
+            <Form.Label>Last Name:</Form.Label>
+            <Form.Control
+              type='text'
+              value={formData.lastName}
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId='phoneNumber'>
+            <Form.Label>Phone Number:</Form.Label>
+            <Form.Control
+              type='tel'
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId='address'>
+            <Form.Label>Address:</Form.Label>
+            <Form.Control
+              as='textarea'
+              rows={3}
+              value={formData.address}
+              onChange={(e) =>
+                setFormData({ ...formData, address: e.target.value })
+              }
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId='description'>
+            <Form.Label>Description:</Form.Label>
+            <Form.Control
+              as='textarea'
+              rows={3}
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+            />
+          </Form.Group>
+          <Form.Group controlId='totalPrice'>
+            <Form.Label>Prix Total CFA:</Form.Label>
+            <Form.Control
+              type='text'
+              value={formData.totalPrice}
+              onChange={(e) =>
+                setFormData({ ...formData, totalPrice: e.target.value })
+              }
+            />
+          </Form.Group>
+          <Button type='submit' className='btn-contact' disabled={isLoading}>
+            {isLoading ? 'Sending...' : 'Send Message'}
+          </Button>
+          {isError && (
+            <Alert variant='danger' className='mt-3'>
+              An error occurred while submitting the form. Please try again.
+            </Alert>
+          )}
+        </Form>
+      )}
       {isFormSubmitted && !isError && (
-        <p className='success-message'>
+        <Alert variant='success' className='mt-3'>
           Message sent successfully! We will respond to you soon.
-        </p>
+        </Alert>
       )}
-      {isError && (
-        <p className='error-message'>
-          An error occurred while submitting the form. Please try again.
-        </p>
-      )}
-    </form>
+    </>
   )
 }
 

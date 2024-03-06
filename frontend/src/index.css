@@ -187,7 +187,10 @@ text-transform: uppercase;
   min-height: calc(100vh - 10rem);
   padding: 5rem 0;
 }
-
+.top-nav{
+  background: var(--clr-primary-4);
+  text-align: center;
+}
 
 main {
   min-height: 80vh;
@@ -266,4 +269,45 @@ table th {
     max-width: 150px; /* Adjust as needed */
     padding: 8px; /* Adjust as needed */
   }
+}
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.product-image{
+  height: 200px;
+}
+.product-image-carousel {
+  width: 100%; /* Set the width of the carousel */
+  height: 300px; /* Set the height of the carousel */
+}
+
+.product-image-carousel img {
+  width: 100%; /* Make sure images fill the container horizontally */
+  height: 100%; /* Make sure images fill the container vertically */
+  object-fit: cover; /* Ensure images maintain aspect ratio and cover the container */
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s ease;
+}
+
+.thumbnail:hover {
+  border-color: #007bff;
+}
+
+.thumbnail-active {
+  border-color: #007bff;
+}
+.big-img{
+  height: 300px;
+  width: 100%;
 }

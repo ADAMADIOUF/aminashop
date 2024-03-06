@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
     )
   },
 })
+
 function checkFileType(file, cb) {
   const filetypes = /jpg|jpeg|png/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
@@ -28,11 +29,24 @@ function checkFileType(file, cb) {
 
 const upload = multer({
   storage,
+  limits: { fileSize: 1024 * 1024 * 5 }, // 5MB limit per file
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb)
+  },
 })
-router.post('/', upload.single('image'), (req, res) => {
-  res.send({
-    message: 'Image Uploaded',
-    image: `/${req.file.path}`,
+
+router.post('/', upload.array('images', 5), (req, res) => {
+  const files = req.files
+  if (!files || files.length === 0) {
+    return res.status(400).json({ message: 'No images uploaded' })
+  }
+
+  const uploadedImages = files.map((file) => `/${file.path}`)
+
+  res.json({
+    message: 'Images Uploaded',
+    images: uploadedImages,
   })
 })
+
 export default router

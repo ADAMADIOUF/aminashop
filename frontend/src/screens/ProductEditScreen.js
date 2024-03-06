@@ -14,7 +14,7 @@ const ProductEditScreen = () => {
   const { id: productId } = useParams()
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
-  const [image, setImage] = useState('')
+   const [images, setImages] = useState([])
   const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
@@ -35,7 +35,7 @@ const ProductEditScreen = () => {
     if (product) {
       setName(product.name)
       setPrice(product.price)
-      setImage(product.image)
+      setImages(product.images)
       setBrand(product.brand)
       setCategory(product.category)
       setCountInStock(product.countInStock)
@@ -49,7 +49,7 @@ const ProductEditScreen = () => {
       productId,
       name,
       price,
-      image,
+      images,
       brand,
       category,
       countInStock,
@@ -66,16 +66,30 @@ const ProductEditScreen = () => {
 
   const uploadFileHandler = async (e) => {
     const formData = new FormData()
-    formData.append('image', e.target.files[0])
+
+    // Append each selected file to the formData object
+    for (let i = 0; i < Math.min(e.target.files.length, 5); i++) {
+      formData.append('images', e.target.files[i])
+    }
+
     try {
       const res = await uploadProductImage(formData).unwrap()
+      const uploadedImages = res.images
+
+      // Concatenate the newly uploaded images with the existing ones
+      setImages((prevImages) => [...prevImages, ...uploadedImages])
+
       toast.success(res.message)
-      setImage(res.image)
     } catch (error) {
       toast.error(error?.data?.message || error.error)
     }
   }
 
+  const deleteImageHandler = (index) => {
+    // Create a new array of images excluding the one to delete
+    const updatedImages = images.filter((_, i) => i !== index)
+    setImages(updatedImages)
+  }
   return (
     <>
       <Link to={`/admin/productlist`} className='btn btn-light my-3'>
@@ -109,18 +123,34 @@ const ProductEditScreen = () => {
               ></Form.Control>
             </Form.Group>
             <Form.Group controlId='image' className='my-2'>
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Enter Image url'
-                value={image}
-                onChange={(e) => setImage}
-              ></Form.Control>
-              <Form.Control
+              <label htmlFor='images'>Images</label>
+              <input
                 type='file'
-                label='Choose file'
+                id='images'
+                multiple // Allow multiple file selection
                 onChange={uploadFileHandler}
-              ></Form.Control>
+              />
+              {images && images.length > 0 && (
+                <div className='mt-2'>
+                  {images.map((image, index) => (
+                    <div key={index} className='mb-2'>
+                      <img
+                        src={image}
+                        alt={`Image ${index + 1}`}
+                        className='img-thumbnail mr-2'
+                        style={{ width: '100px', height: '100px' }}
+                      />
+                      <button
+                        type='button'
+                        className='btn btn-danger'
+                        onClick={() => deleteImageHandler(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </Form.Group>
             <Form.Group controlId='brand'>
               <Form.Label>brand</Form.Label>
