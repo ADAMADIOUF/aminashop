@@ -32,6 +32,9 @@ import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
+import Shoes from './components/Shoes'
+import Clothing from './components/Clothing'
+import Accesory from './components/Accesory'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -39,6 +42,9 @@ const router = createBrowserRouter(
       <Route path='/search/:keyword' element={<HomeScreen />} />
       <Route path='/page/:pageNumber' element={<HomeScreen />} />
       <Route path='/product/:id' element={<ProductScreen />} />
+      <Route path='/clothing' element={<Clothing />} />
+      <Route path='/shoes' element={<Shoes />} />
+      <Route path='/accesory' element={<Accesory />} />
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />

@@ -248,9 +248,17 @@ table th {
 .product-image{
   height: 200px;
 }
-.product-image-carousel{
-  height: 400px;
+.product-image-carousel {
+  height: 500px; /* Adjust the height as needed */
+  width: 100%; /* Set width to 100% to fill the container */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire area */
 }
+@media (max-width:768px) {
+  .carousel-caption{
+    display: none;
+  }
+}
+
 /* Define media queries for responsiveness */
 @media only screen and (max-width: 600px) {
   /* Adjust table layout for small screens */
@@ -270,27 +278,8 @@ table th {
     padding: 8px; /* Adjust as needed */
   }
 }
-.carousel-caption {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-.product-image{
-  height: 200px;
-}
-.product-image-carousel {
-  width: 100%; /* Set the width of the carousel */
-  height: 300px; /* Set the height of the carousel */
-}
 
-.product-image-carousel img {
-  width: 100%; /* Make sure images fill the container horizontally */
-  height: 100%; /* Make sure images fill the container vertically */
-  object-fit: cover; /* Ensure images maintain aspect ratio and cover the container */
-}
+
 
 .thumbnail {
   width: 100px;
@@ -307,7 +296,4 @@ table th {
 .thumbnail-active {
   border-color: #007bff;
 }
-.big-img{
-  height: 300px;
-  width: 100%;
-}
+

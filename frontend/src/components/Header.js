@@ -38,6 +38,15 @@ const logoutHandler = async () => {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
               <SearchProduct />
+              <LinkContainer to='/clothing'>
+                <Nav.Link>Clothing</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/shoes'>
+                <Nav.Link>Shoes</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/accesory'>
+                <Nav.Link>Accesory</Nav.Link>
+              </LinkContainer>
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <FaShoppingCart /> Cart

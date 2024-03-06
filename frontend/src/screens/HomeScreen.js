@@ -8,6 +8,8 @@ import { useGetProductsQuery } from '../Slices/productApiSlice'
 import { Link, useParams } from 'react-router-dom'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
+import Category from '../components/Category'
+
 
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams()
@@ -45,7 +47,9 @@ const HomeScreen = () => {
           Go Back
         </Link>
       )}
-      <h1>Latest Products</h1>
+      {!keyword && <Category />}
+
+      {!keyword && <h1>Best Sellers</h1>}
       <Row>
         {data.products.map((product) => (
           <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

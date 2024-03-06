@@ -16,6 +16,16 @@ const getPorducts = asyncHandler(async (req, res) => {
     .skip(pageSize * (page - 1))
   res.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
+const getPorductsShoes = asyncHandler(async (req, res) => {
+  
+  const products = await Product.find({ category: 'Shoes' })
+
+  res.json({ products })
+})
+const getPorductsClothing = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: 'Clothing' })
+  res.json({ products })
+})
 const getSingleProduct = asyncHandler( async (req, res) => {
   const product = await Product.findById(req.params.id)
   if (product) {
@@ -140,6 +150,8 @@ const getTopProducts = asyncHandler(async (req, res) => {
 })
 export {
   getPorducts,
+  getPorductsShoes,
+  getPorductsClothing,
   getSingleProduct,
   createProduct,
   updateProduct,
@@ -147,4 +159,5 @@ export {
   createProductReview,
   deleteProductReview,
   getTopProducts,
+
 }
