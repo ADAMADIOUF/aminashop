@@ -2,12 +2,15 @@ import React from 'react'
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
-
+import logo from "../assets/logo.png"
 const Footer = () => {
   return (
     <footer className='footer py-4 bg-dark'>
       <Container>
         <Row className='justify-content-center align-items-center'>
+          <Col xs={12} md={6}>
+            <img src={logo} alt='' className='logo' />
+          </Col>
           <Col xs={12} md={6} className='text-center text-md-left mb-3 mb-md-0'>
             <div className='social-icons mb-3 mb-md-0'>
               <a
@@ -51,8 +54,6 @@ const Footer = () => {
               </Link>
             </div>
           </Col>
-        </Row>
-        <Row className='justify-content-center'>
           <Col xs={12} className='text-center mt-3'>
             <p className='footer-text mb-0 text-white'>
               Amina Shop &copy; {new Date().getFullYear()}
