@@ -4,51 +4,54 @@ import { Card, Col, Row } from 'react-bootstrap'
 import a from "../assets/c1.png"
 import b from '../assets/c2.png'
 import c from '../assets/c3.png'
-
-
-const Category = ({ image, title, description, link }) => {
+import d from '../assets/c4.png'
+const Category = () => {
   return (
-    <div className='category'>
+    <div className='category section-center'>
       <h3>Category Showcase</h3>
       <Card className='category-card'>
         <Row>
           <Col>
-            <Link to={link}>
-              <Card.Img variant='top' src={a} alt={title} />
+            <Link to='/clothing'>
+              <Card.Img variant='top' src={a} alt='' />
             </Link>
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
-              <Card.Text>{description}</Card.Text>
-              <Link to="/clothing" className='btn btn-primary'>
+              <Link to='/clothing' className='btn btn-primary'>
                 Shop Now
               </Link>
             </Card.Body>
           </Col>
           <Col>
-            <Link to={link}>
-              <Card.Img variant='top' src={b} alt={title} />
+            <Link to='/shoes'>
+              <Card.Img variant='top' src={b} alt='' />
             </Link>
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
-              <Card.Text>{description}</Card.Text>
-              <Link to="/shoes" className='btn btn-primary'>
-                Shop Now
-              </Link>
-            </Card.Body>
-          </Col>
-          <Col>
-            <Link to={link}>
-              <Card.Img variant='top' src={c} alt={title} />
-            </Link>
-            <Card.Body>
-              <Card.Title>{title}</Card.Title>
-              <Card.Text>{description}</Card.Text>
-              <Link to="accesory" className='btn btn-primary'>
+              <Link to='/shoes' className='btn btn-primary'>
                 Shop Now
               </Link>
             </Card.Body>
           </Col>
         </Row>
+        <Col>
+          <Link to='/accesory'>
+            <Card.Img variant='top' src={c} alt='' />
+          </Link>
+          <Card.Body>
+            <Link to='/accesory' className='btn btn-primary'>
+              Shop Now
+            </Link>
+          </Card.Body>
+        </Col>
+        <Col>
+          <Link to='/african'>
+            <Card.Img variant='top' src={d} alt='' />
+          </Link>
+          <Card.Body>
+            <Link to='/african' className='btn btn-primary'>
+              Shop Now
+            </Link>
+          </Card.Body>
+        </Col>
       </Card>
     </div>
   )

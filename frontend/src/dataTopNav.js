@@ -1,15 +1,16 @@
 const information = [
   {
     id: 1,
-    title: 'bienvenue chez Amina Shop',
+    title: 'Welcome to Amina Shop',
   },
   {
     id: 2,
-    title: 'senegal dakar',
+    title: 'Senegal, Dakar',
   },
   {
     id: 3,
-    title: '+221 775552646',
+    title: '+221 775190104',
   },
 ]
+
 export default information

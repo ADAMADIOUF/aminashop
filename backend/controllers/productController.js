@@ -26,6 +26,14 @@ const getPorductsClothing = asyncHandler(async (req, res) => {
   const products = await Product.find({ category: 'Clothing' })
   res.json({ products })
 })
+const getPorductsAccesory = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: 'Accesory' })
+  res.json({ products })
+})
+const getPorductsAfrican = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: 'African' })
+  res.json({ products })
+})
 const getSingleProduct = asyncHandler( async (req, res) => {
   const product = await Product.findById(req.params.id)
   if (product) {
@@ -152,6 +160,7 @@ export {
   getPorducts,
   getPorductsShoes,
   getPorductsClothing,
+  getPorductsAccesory,getPorductsAfrican,
   getSingleProduct,
   createProduct,
   updateProduct,

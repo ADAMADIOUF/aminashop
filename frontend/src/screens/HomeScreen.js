@@ -9,6 +9,10 @@ import { Link, useParams } from 'react-router-dom'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 import Category from '../components/Category'
+import Banner from '../components/Banner'
+import HomeAfrican from '../components/HomeAfrican'
+import SliderHeader from '../components/SliderHeader'
+import Delivery from '../components/Delivery'
 
 
 const HomeScreen = () => {
@@ -41,7 +45,7 @@ const HomeScreen = () => {
   return (
     <>
       {!keyword ? (
-        <ProductCarousel />
+        <SliderHeader />
       ) : (
         <Link to='/' className='btn btn-light'>
           Go Back
@@ -62,6 +66,9 @@ const HomeScreen = () => {
         page={data.page}
         keyword={keyword ? keyword : ''}
       />
+      {!keyword && <Banner />}
+      {!keyword && <HomeAfrican />}
+      {!keyword && <Delivery />}
     </>
   )
 }

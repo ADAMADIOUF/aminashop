@@ -35,6 +35,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import Shoes from './components/Shoes'
 import Clothing from './components/Clothing'
 import Accesory from './components/Accesory'
+import African from './components/African'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
       <Route path='/clothing' element={<Clothing />} />
       <Route path='/shoes' element={<Shoes />} />
       <Route path='/accesory' element={<Accesory />} />
+      <Route path='/african' element={<African/>} />
       <Route path='/cart' element={<CartScreen />} />
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />

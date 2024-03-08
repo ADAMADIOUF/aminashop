@@ -9,7 +9,7 @@ import { useLogoutMutation } from '../Slices/userApiSlice'
 import { logout } from '../Slices/autSlice'
 import { clearCartItems } from '../Slices/cartSlice'
 import SearchProduct from './SearchProduct'
-
+import logo from "../assets/logo.png"
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -32,7 +32,9 @@ const logoutHandler = async () => {
       <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>Amina Shop</Navbar.Brand>
+            <Navbar.Brand>
+              <img src={logo} alt="" className="logo" />
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
@@ -45,7 +47,10 @@ const logoutHandler = async () => {
                 <Nav.Link>Shoes</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/accesory'>
-                <Nav.Link>Accesory</Nav.Link>
+                <Nav.Link>Accessories</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/african'>
+                <Nav.Link>Custom African</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/cart'>
                 <Nav.Link>

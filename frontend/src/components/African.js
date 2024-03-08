@@ -2,12 +2,12 @@ import React from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Rating from './Rating'
-import { useGetProductsClothingQuery } from '../Slices/productApiSlice'
+import {  useGetProductsAfricanQuery } from '../Slices/productApiSlice'
 import Message from './Message'
 import Loader from './Loader'
 
-const Clothing = () => {
-  const { data, isLoading: loading, error } = useGetProductsClothingQuery()
+const African = () => {
+  const { data, isLoading: loading, error } = useGetProductsAfricanQuery()
 
   // Check if data is still loading
   if (loading) {
@@ -26,19 +26,16 @@ const Clothing = () => {
 
   // Filter products by category
   const shoesProducts = data.products.filter(
-    (product) => product.category === 'Clothing'
+    (product) => product.category === 'African'
   )
-  console.log(shoesProducts)
 
   return (
-    <>
-      <h2>Trendy Clothing Selection</h2>
+    <div>
+      <h2>Custom African Wear</h2>
       <p>
-        Discover our versatile collection of clothing, designed to keep you
-        stylish and comfortable in any setting, whether it's casual outings or
-        special occasions.
+        Discover our collection of stunning African-inspired clothing, perfect
+        for any occasion.
       </p>
-
       <Row>
         {shoesProducts.map((product) => (
           <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -68,8 +65,8 @@ const Clothing = () => {
           </Col>
         ))}
       </Row>
-    </>
+    </div>
   )
 }
 
-export default Clothing
+export default African
