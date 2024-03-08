@@ -8,7 +8,8 @@ const contactFormData = asyncHandler(async (req, res) => {
     phone,
     description,
     address,
-    totalPrice, // Assuming totalPrice is included in the request body
+    totalPrice,
+    productName,
   } = req.body
 
   try {
@@ -20,6 +21,7 @@ const contactFormData = asyncHandler(async (req, res) => {
       description,
       address,
       totalPrice,
+      productName,
     })
 
     // Save the contact to the database

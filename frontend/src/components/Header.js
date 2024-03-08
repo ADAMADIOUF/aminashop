@@ -2,38 +2,42 @@ import { useState } from 'react'
 import { Navbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap'
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../Slices/userApiSlice'
 import { logout } from '../Slices/autSlice'
 import { clearCartItems } from '../Slices/cartSlice'
 import SearchProduct from './SearchProduct'
-import logo from "../assets/logo.png"
+import logo from '../assets/logo.png'
+
+
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {cartItems}=useSelector((state)=>state.cart)
-const { userInfo } = useSelector((state) => state.auth)
-const [logoutApiCall] = useLogoutMutation()
-const logoutHandler = async () => {
-  try {
-    await logoutApiCall().unwrap()
-    dispatch(logout())
-    dispatch(clearCartItems())
-    navigate(`/login`)
-  } catch (error) {
-    console.log(error)
+  const { cartItems } = useSelector((state) => state.cart)
+  const { userInfo } = useSelector((state) => state.auth)
+  const [logoutApiCall] = useLogoutMutation()
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap()
+      dispatch(logout())
+      dispatch(clearCartItems())
+      navigate(`/login`)
+    } catch (error) {
+      console.log(error)
+    }
   }
-}
-  
+ 
+ 
+
   return (
     <header>
-      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-              <img src={logo} alt="" className="logo" />
+              <img src={logo} alt='' className='logo' />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -52,6 +56,7 @@ const logoutHandler = async () => {
               <LinkContainer to='/african'>
                 <Nav.Link>Custom African</Nav.Link>
               </LinkContainer>
+            
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <FaShoppingCart /> Cart

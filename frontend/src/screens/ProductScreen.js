@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
@@ -22,6 +22,12 @@ import Meta from '../components/Meta'
 
 
 const ProductScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
    const [mainImage, setMainImage] = useState('')
   const { id: productId } = useParams()
   const navigate = useNavigate()
@@ -122,7 +128,7 @@ const handleThumbnailImageClick = (image) => {
                 text={`${product.numReviews} reviews`}
               />
             </ListGroupItem>
-            <ListGroupItem>Price: ${product.price}</ListGroupItem>
+            <ListGroupItem>Price: {product.price} CFA</ListGroupItem>
             <ListGroupItem>Description: {product.description}</ListGroupItem>
           </ListGroup>
         </Col>
@@ -133,7 +139,7 @@ const handleThumbnailImageClick = (image) => {
                 <Row>
                   <Col>Price:</Col>
                   <Col>
-                    <strong>${product.price}</strong>
+                    <strong>{product.price} CFA</strong>
                   </Col>
                 </Row>
               </ListGroupItem>

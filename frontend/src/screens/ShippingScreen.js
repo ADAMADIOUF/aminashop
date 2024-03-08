@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import FormContainer from '../components/FormContainer'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,6 +7,12 @@ import { savesShippingAddress } from '../Slices/cartSlice'
 import CheckoutSteps from '../components/CheckoutSteps'
 
 const ShippingScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
   const [address, setAddress] = useState(shippingAddress?.address || '')

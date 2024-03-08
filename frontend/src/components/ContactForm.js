@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { useSendContactFormMutation } from '../Slices/contactApiSlice'
 import { useLocation, useParams } from 'react-router-dom'
 import { useGetOrderDetailsQuery } from '../Slices/orderApiSlice'
@@ -8,6 +9,7 @@ const Contact = () => {
   const location = useLocation()
   const { id: orderId } = useParams()
   const { data: order } = useGetOrderDetailsQuery(orderId)
+  console.log(order);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,6 +17,10 @@ const Contact = () => {
     description: '',
     address: '',
     totalPrice: order ? order.totalPrice : '', // Initialize totalPrice with order total price or empty string
+    productName:
+      order && order.orderItems.length > 0
+        ? order.orderItems.map((item) => item.name).join(', ')
+        : '',
   })
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
   const [sendContactForm, { isLoading, isError }] = useSendContactFormMutation()
@@ -44,10 +50,8 @@ const Contact = () => {
         emailContent += `\nTotal Price: $${formData.totalPrice}`
       }
 
-      setIsFormSubmitted(true) 
-      setTimeout(() => {
-        
-      }, 5000)
+      setIsFormSubmitted(true)
+      setTimeout(() => {}, 5000)
 
       const result = await sendContactForm({
         ...formData,
@@ -62,6 +66,7 @@ const Contact = () => {
         description: '',
         address: '',
         totalPrice: '',
+        productName: '', // Reset productName state after form submission
       })
     } catch (error) {
       console.error('An error occurred while submitting the form:', error)
@@ -136,6 +141,16 @@ const Contact = () => {
               value={formData.totalPrice}
               onChange={(e) =>
                 setFormData({ ...formData, totalPrice: e.target.value })
+              }
+            />
+          </Form.Group>
+          <Form.Group controlId='productName'>
+            <Form.Label>Product Name:</Form.Label>
+            <Form.Control
+              type='text'
+              value={formData.productName}
+              onChange={(e) =>
+                setFormData({ ...formData, productName: e.target.value })
               }
             />
           </Form.Group>

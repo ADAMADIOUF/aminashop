@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import Product from '../components/Product'
 
@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import { useGetProductsQuery } from '../Slices/productApiSlice'
 import { Link, useParams } from 'react-router-dom'
 import Paginate from '../components/Paginate'
-import ProductCarousel from '../components/ProductCarousel'
+
 import Category from '../components/Category'
 import Banner from '../components/Banner'
 import HomeAfrican from '../components/HomeAfrican'
@@ -16,6 +16,12 @@ import Delivery from '../components/Delivery'
 
 
 const HomeScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
   const { pageNumber, keyword } = useParams()
   const {
     data,

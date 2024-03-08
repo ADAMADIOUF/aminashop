@@ -16,7 +16,7 @@ const Category = () => {
               <Card.Img variant='top' src={a} alt='' />
             </Link>
             <Card.Body>
-              <Link to='/clothing' className='btn btn-primary'>
+              <Link to='/clothing' className='btn '>
                 Shop Now
               </Link>
             </Card.Body>
@@ -26,7 +26,7 @@ const Category = () => {
               <Card.Img variant='top' src={b} alt='' />
             </Link>
             <Card.Body>
-              <Link to='/shoes' className='btn btn-primary'>
+              <Link to='/shoes' className='btn'>
                 Shop Now
               </Link>
             </Card.Body>
@@ -37,7 +37,7 @@ const Category = () => {
             <Card.Img variant='top' src={c} alt='' />
           </Link>
           <Card.Body>
-            <Link to='/accesory' className='btn btn-primary'>
+            <Link to='/accesory' className='btn '>
               Shop Now
             </Link>
           </Card.Body>
@@ -47,7 +47,7 @@ const Category = () => {
             <Card.Img variant='top' src={d} alt='' />
           </Link>
           <Card.Body>
-            <Link to='/african' className='btn btn-primary'>
+            <Link to='/african' className='btn'>
               Shop Now
             </Link>
           </Card.Body>

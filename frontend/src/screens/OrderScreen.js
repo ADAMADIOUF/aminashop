@@ -21,6 +21,12 @@ import {
 import { useSelector } from 'react-redux'
 import ContactForm from '../components/ContactForm'
 const OrderScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
   const { id: orderId } = useParams()
   const {
     data: order,
@@ -44,7 +50,7 @@ useEffect(() => {
         type: 'resetOptions',
         value: {
           'client-id': paypal.clientId,
-          currency: 'USD',
+          currency: 'XAF', // Change currency to Franc CFA
         },
       })
       paypalDispatch({ type: 'setLoadingStatus', value: 'pending' })
@@ -56,6 +62,7 @@ useEffect(() => {
     }
   }
 }, [order, paypal, paypalDispatch, loadingPayPal, errorPayPal])
+
 function onApprove(data, actions) {
   return actions.order.capture().then(async function (details) {
     try {
@@ -87,6 +94,7 @@ function createOrder(data, actions) {
       return orderId
     })
 }
+
 const deliverHandler = async () => {
   try {
     await deliverOrder(orderId)
@@ -156,7 +164,7 @@ const deliverHandler = async () => {
                       <Link to={`/product/${item.product}`}>{item.name}</Link>
                     </Col>
                     <Col md={4}>
-                      {item.qty} x ${item.price} =${item.qty * item.price}
+                      {item.qty} x {item.price} CFA ={item.qty * item.price} CFA
                     </Col>
                   </Row>
                 </ListGroupItem>
@@ -173,19 +181,19 @@ const deliverHandler = async () => {
               <ListGroupItem>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>{order.itemsPrice} CFA</Col>
                 </Row>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>{order.shippingPrice} CFA</Col>
                 </Row>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>{order.taxPrice} CFA</Col>
                 </Row>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>{order.totalPrice} CFA</Col>
                 </Row>
               </ListGroupItem>
 

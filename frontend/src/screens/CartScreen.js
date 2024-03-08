@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaTrash } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,6 +15,12 @@ import {
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../Slices/cartSlice'
 const CartScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state) => state.cart)
@@ -48,7 +54,7 @@ const CartScreen = () => {
                   <Col md={3}>
                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
-                  <Col md={2}>${item.price}</Col>
+                  <Col md={2}>{item.price} CFA</Col>
                   <Col md={2}>
                     <Form.Control
                       as='select'

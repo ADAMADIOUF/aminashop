@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import { Link,  } from 'react-router-dom'
 import Rating from './Rating'
@@ -7,6 +7,13 @@ import Message from './Message'
 import Loader from './Loader'
 
 const Shoes = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
+  
   const {
     data,
     isLoading: loading,
@@ -65,7 +72,7 @@ const Shoes = () => {
                     text={`${product.numReviews} reviews`}
                   />
                 </Card.Text>
-                <Card.Text as='h3'>${product.price}</Card.Text>
+                <Card.Text as='h3'>{product.price} CFA</Card.Text>
               </Card.Body>
             </Card>
           </Col>

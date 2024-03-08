@@ -17,6 +17,12 @@ import {
 import { useCreateOrderMutation } from '../Slices/orderApiSlice'
 import { clearCartItems } from '../Slices/cartSlice'
 const PlaceOrderScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
@@ -87,7 +93,7 @@ const PlaceOrderScreen = () => {
                           <Link to={`/products/${item._id}`}>{item.name}</Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty}x${item.price}= ${item.qty * item.price}
+                          {item.qty}x{item.price}CFA= {item.qty * item.price}CFA
                         </Col>
                       </Row>
                     </ListGroupItem>
@@ -106,25 +112,25 @@ const PlaceOrderScreen = () => {
               <ListGroupItem>
                 <Row>
                   <Col>Items:</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>{cart.itemsPrice} CFA</Col>
                 </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
                   <Col>Shipping:</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>{cart.shippingPrice} CFA</Col>
                 </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>{cart.taxPrice} CFA</Col>
                 </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>{cart.totalPrice} CFA</Col>
                 </Row>
               </ListGroupItem>
               <ListGroupItem>

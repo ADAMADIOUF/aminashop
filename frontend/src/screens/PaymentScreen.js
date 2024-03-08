@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { savePaymentMethod } from '../Slices/cartSlice'
 
 const PaymentScreen = () => {
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }, [])
   const [paymentMethod, setPaymentMethod] = useState('PayPal')
   const navigate = useNavigate()
   const dispatch = useDispatch()

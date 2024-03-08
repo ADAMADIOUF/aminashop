@@ -17,7 +17,6 @@ const contactSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      
     },
     address: {
       type: String,
@@ -27,6 +26,9 @@ const contactSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    productName:{
+      type:String
+    }
   },
   {
     timestamps: true,
@@ -45,6 +47,7 @@ contactSchema.post('save', async function (doc) {
       Description: ${doc.description}
       Address: ${doc.address}
       Total Price: ${doc.totalPrice}
+       Product name: ${doc.productName}
     `,
   }
 

@@ -16,7 +16,7 @@ const SearchProduct = () => {
     }
   }
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler} className='search'>
       <Form.Control
         type='text'
         name='q'
@@ -29,7 +29,7 @@ const SearchProduct = () => {
         type='submit'
         variant='outline-success'
         className='p-2 mx-2'
-      ></Button>
+      >search</Button>
     </Form>
   )
 }
